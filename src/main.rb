@@ -9,4 +9,8 @@ class GameEngine
     true
   end
   
+  def GameEngine.getNextGeneration(currentGeneration)
+  
+  end
+  
 end
