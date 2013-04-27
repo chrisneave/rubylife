@@ -6,14 +6,12 @@ class GameState
       raise ArgumentError
     end
     
-    #@columns, @rows = columns, rows
-    @matrix = Array.new(columns)
-    @matrix.each do |column|
-      column = Array.new(rows)
-    end
+    @matrix = Array.new()
+    (1..columns).each {|column| @matrix << Array.new(rows)}
   end
   
   def getCell(column, row)
+    @matrix[column][row]
   end
   
   def setCell(column, row, value)
