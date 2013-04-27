@@ -2,10 +2,14 @@
 class GameState
   
   def initialize(columns, rows)
-    @columns, @rows = columns, rows
-    @matrix = new Array(columns)
+    if columns < 1 || rows < 1
+      raise ArgumentError
+    end
+    
+    #@columns, @rows = columns, rows
+    @matrix = Array.new(columns)
     @matrix.each do |column|
-      column = new Array(rows)
+      column = Array.new(rows)
     end
   end
   
@@ -15,4 +19,11 @@ class GameState
   def setCell(column, row, value)
   end
   
+  def columns
+    @matrix.length
+  end
+  
+  def rows
+    @matrix[0].length
+  end
 end
