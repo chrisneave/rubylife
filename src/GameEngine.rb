@@ -10,7 +10,9 @@ class GameEngine
   end
   
   def GameEngine.getNextGeneration(currentGeneration)
-  
+    if currentGeneration.is_a?(Array) != true
+      raise ArgumentError
+    end
   end
   
 end
