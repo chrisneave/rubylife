@@ -6,8 +6,7 @@ class GameState
       raise ArgumentError
     end
     
-    @matrix = Array.new()
-    (1..columns).each {|column| @matrix << Array.new(rows)}
+    @matrix = Array.new(columns) { Array.new(rows) }
   end
   
   def getCell(column, row)

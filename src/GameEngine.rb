@@ -1,3 +1,4 @@
+require "src/GameState"
 
 class GameEngine
   
@@ -10,7 +11,7 @@ class GameEngine
   end
   
   def GameEngine.getNextGeneration(currentGeneration)
-    if currentGeneration.is_a?(Array) != true
+    if currentGeneration.is_a?(GameState) != true
       raise ArgumentError
     end
   end

@@ -1,5 +1,6 @@
 require "test/unit"
 require "src/GameEngine"
+require "src/GameState"
 
 class GameEngineTests
   
@@ -37,16 +38,20 @@ class GameEngineTests
       assert_raise ArgumentError do
         GameEngine.getNextGeneration("a string")
       end
+      
+      assert_nothing_raised do
+        GameEngine.getNextGeneration(GameState.new(1,1))
+      end
     end
     
-    def test_validGameState_ReturnsDifferentValue
+    def test_ValidGameState_ReturnsDifferentValue
       # Arrange
-      input = [[1,0],[0,1]]
+      input = GameState.new(2,2)
       # Act
       result = GameEngine.getNextGeneration(input)
       # Assert
-      assert input != result
-      assert result.is_a?(Array)
+      assert(input != result)
+      assert(result.is_a?(GameState))
     end
 
   end
