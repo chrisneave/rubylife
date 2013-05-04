@@ -2,9 +2,7 @@ require "test/unit"
 require "src/GameState"
 
 class GameStateTests
-  
   class Initialize < Test::Unit::TestCase
-    
     def test_ZeroColumnsAndRows_ThrowsArgumentError
       # Arrange
       # Act
@@ -30,27 +28,128 @@ class GameStateTests
       target = GameState.new(10, 20)
       
       # Assert
-      target.each do |i|
-        i.each do |j|
-          assert_equal(0, j, "Index set to #{j}")
+      (0..9).each do |i|
+        (0..19).each do |j|
+          assert_equal(0, target.get_value_at_column_and_row(i, j), "Index set to #{j}")
         end
       end
     end
-    
   end
   
-  class GetCell < Test::Unit::TestCase
-    
+  class GetValueAtColumnAndRow < Test::Unit::TestCase
     def test_ValidIndex_ReturnsCorrectValue
       # Arrange
       target = GameState.new(2,2)
       
       # Act
-      result = target.getCell(-1, 0)
-      
       # Assert
-      assert_equal(0, result)
+      assert_equal(0, target.get_value_at_column_and_row(0, 0))
+      assert_equal(0, target.get_value_at_column_and_row(1, 0))
+      assert_equal(0, target.get_value_at_column_and_row(0, 1))
+      assert_equal(0, target.get_value_at_column_and_row(1, 1))
     end
     
+    def test_IndexOutOfBounds_ThrowsIndexError
+      # Arrange
+      target = GameState.new(2, 2)
+      
+      # Act
+      # Assert
+      assert_raise IndexError do
+        target.get_value_at_column_and_row(-1, 1)
+      end
+
+      assert_raise IndexError do
+        target.get_value_at_column_and_row(1, -1)
+      end
+
+      assert_raise IndexError do
+        target.get_value_at_column_and_row(5, 1)
+      end
+      
+      assert_raise IndexError do
+        target.get_value_at_column_and_row(1, 5)
+      end
+    end
+  end
+
+  class SetValueAtColumnAndRow < Test::Unit::TestCase
+    def test_ValidIndex_ReturnsCorrectValue
+      # Arrange
+      target = GameState.new(2,2)
+      
+      # Act
+      target.set_value_at_column_and_row(0, 0, 1)
+      target.set_value_at_column_and_row(1, 0, 1)
+      target.set_value_at_column_and_row(0, 1, 1)
+      target.set_value_at_column_and_row(1, 1, 1)
+      
+      # Assert
+      assert_equal(1, target.get_value_at_column_and_row(0, 0))
+      assert_equal(1, target.get_value_at_column_and_row(1, 0))
+      assert_equal(1, target.get_value_at_column_and_row(0, 1))
+      assert_equal(1, target.get_value_at_column_and_row(1, 1))
+    end
+    
+    def test_IndexOutOfBounds_ThrowsIndexError
+      # Arrange
+      target = GameState.new(2, 2)
+      
+      # Act
+      # Assert
+      assert_raise IndexError do
+        target.set_value_at_column_and_row(-1, 1, 1)
+      end
+      
+      assert_raise IndexError do
+        target.set_value_at_column_and_row(1, -1, 1)
+      end
+      
+      assert_raise IndexError do
+        target.set_value_at_column_and_row(5, 1, 1)
+      end
+      
+      assert_raise IndexError do
+        target.set_value_at_column_and_row(1, 5, 1)
+      end
+    end
+  end
+  
+  class GetNeighbors < Test::Unit::TestCase
+    def test_IndexOutOfBounds_ReturnsEmptyArray
+      # Arrange
+      target = GameState.new(3, 3)
+      
+      # Act
+      # Assert
+      assert_equal [], target.get_neighbors(-1, 1)
+      assert_equal [], target.get_neighbors(1, -1)
+      assert_equal [], target.get_neighbors(4, 0)
+      assert_equal [], target.get_neighbors(0, 4)
+    end
+    
+    def test_CellHas8Neighbors_Returns8
+      # Arrange
+      target = GameState.new(3, 3)
+      target.set_value_at_column_and_row(1, 1, 1)
+      
+      # Act
+      cells = target.get_neighbors(1, 1)
+      
+      # Assert
+      assert_equal Array.new(8, 0), cells
+    end
+    
+    def test_CellHas0Neighbors_Returns0
+      # Arrange
+      target = GameState.new(1, 1)
+      target.set_value_at_column_and_row(0, 0, 1)
+      
+      # Act
+      cells = target.get_neighbors(0, 0)
+      
+      # Assert
+      assert_equal [], cells
+    end
   end
 end
