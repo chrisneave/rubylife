@@ -122,10 +122,10 @@ class GameStateTests
       
       # Act
       # Assert
-      assert_equal [], target.get_neighbors(-1, 1)
-      assert_equal [], target.get_neighbors(1, -1)
-      assert_equal [], target.get_neighbors(4, 0)
-      assert_equal [], target.get_neighbors(0, 4)
+      assert_equal 0, target.get_neighbors(-1, 1)
+      assert_equal 0, target.get_neighbors(1, -1)
+      assert_equal 0, target.get_neighbors(4, 0)
+      assert_equal 0, target.get_neighbors(0, 4)
     end
     
     def test_CellHas8Neighbors_Returns8
@@ -137,7 +137,7 @@ class GameStateTests
       cells = target.get_neighbors(1, 1)
       
       # Assert
-      assert_equal Array.new(8, 0), cells
+      assert_equal 8, cells
     end
     
     def test_CellHas0Neighbors_Returns0
@@ -149,7 +149,27 @@ class GameStateTests
       cells = target.get_neighbors(0, 0)
       
       # Assert
-      assert_equal [], cells
+      assert_equal 0, cells
+    end
+    
+    def test_CellIsInCorner_Returns3
+      # Arrange
+      # Act
+      # Assert
+      assert_equal 3, GameState.new(3, 3).get_neighbors(0, 0)
+      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 0)
+      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 0)
+      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 2)
+    end
+    
+    def test_CellIsInMiddleOfEdge_Returns5
+      # Arrange
+      # Act
+      # Assert
+      assert_equal 5, GameState.new(3, 3).get_neighbors(1, 0)
+      assert_equal 5, GameState.new(3, 3).get_neighbors(0, 1)
+      assert_equal 5, GameState.new(3, 3).get_neighbors(2, 1)
+      assert_equal 5, GameState.new(3, 3).get_neighbors(2, 1)
     end
   end
 end
