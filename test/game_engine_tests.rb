@@ -1,6 +1,5 @@
 require "test/unit"
-require "src/GameEngine"
-require "src/GameState"
+require "my_lib"
 
 class GameEngineTests
   

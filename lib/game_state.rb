@@ -1,4 +1,6 @@
 
+require "my_lib"
+
 class GameState
   def initialize(columns, rows)
     if columns < 1 || rows < 1

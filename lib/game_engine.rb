@@ -1,4 +1,5 @@
-require "src/GameState"
+
+require "my_lib"
 
 class GameEngine
   def self.cell_lives?(cellState, liveNeighbors)

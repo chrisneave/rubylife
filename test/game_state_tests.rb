@@ -1,5 +1,5 @@
 require "test/unit"
-require "src/GameState"
+require "my_lib"
 
 class GameStateTests
   class Initialize < Test::Unit::TestCase
