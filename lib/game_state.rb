@@ -1,4 +1,3 @@
-
 require "my_lib"
 
 class GameState
