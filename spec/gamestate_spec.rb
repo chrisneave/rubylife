@@ -88,13 +88,14 @@ describe GameState, "#get_neighbors" do
   it "Returns zero for out of bounds coordinates" do
     # Arrange
     gamestate = GameState.new(2, 2)
+    expected = []
     
     # Act
     # Assert
-    expect(gamestate.get_neighbors(-1, 1)).to eq(0)
-    expect(gamestate.get_neighbors(1, -1)).to eq(0)
-    expect(gamestate.get_neighbors(4, 0)).to eq(0)
-    expect(gamestate.get_neighbors(0, 4)).to eq(0)
+    expect(gamestate.get_neighbors(-1, 1)).to eq(expected)
+    expect(gamestate.get_neighbors(1, -1)).to eq(expected)
+    expect(gamestate.get_neighbors(4, 0)).to eq(expected)
+    expect(gamestate.get_neighbors(0, 4)).to eq(expected)
   end
   
   it "Returns 8 cells when surrounded by 8 cells" do

@@ -29,7 +29,7 @@ class GameState
   
   def get_neighbors(column, row)
     result = []
-    return result.length if out_of_bounds?(column, row)
+    return result if out_of_bounds?(column, row)
     
     result << @matrix[column - 1][row - 1] unless out_of_bounds?(column - 1, row - 1)
     result << @matrix[column - 1][row] unless out_of_bounds?(column - 1, row)
@@ -39,7 +39,7 @@ class GameState
     result << @matrix[column + 1][row - 1] unless out_of_bounds?(column + 1, row - 1)
     result << @matrix[column + 1][row] unless out_of_bounds?(column + 1, row)
     result << @matrix[column + 1][row + 1] unless out_of_bounds?(column + 1, row + 1)
-    result.length
+    result
   end
   
   def out_of_bounds?(column, row)
