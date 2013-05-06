@@ -82,6 +82,10 @@ describe GameState, "#set_value_at_column_and_row" do
     expect { gamestate.set_value_at_column_and_row(5, 1, 1) }.to raise_error(IndexError)
     expect { gamestate.set_value_at_column_and_row(1, 5, 1) }.to raise_error(IndexError)
   end
+  
+  it "Returns self for a valid index" do
+    expect(GameState.new(2, 2).set_value_at_column_and_row(0, 0, 1)).to be_a(GameState)
+  end
 end
 
 describe GameState, "#get_neighbors" do
@@ -142,5 +146,16 @@ describe GameState, "#get_neighbors" do
     expect(gamestate.get_neighbors(0, 1)).to eq(expected)
     expect(gamestate.get_neighbors(2, 1)).to eq(expected)
     expect(gamestate.get_neighbors(1, 2)).to eq(expected)
+  end
+end
+
+describe GameState, "#row" do
+  it "Raises IndexError for out of bounds index values" do
+    expect { GameState.new(3, 3).row(3) }.to raise_error(IndexError)
+    expect { GameState.new(3, 3).row(1) }.to_not raise_error(IndexError)
+  end
+  
+  it "Returns the correct row for a valid index value" do
+    expect(GameState.new(3, 3).set_value_at_column_and_row(1, 1, 1).row(1)).to eq([0, 1, 0])
   end
 end

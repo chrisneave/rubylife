@@ -17,6 +17,7 @@ class GameState
   def set_value_at_column_and_row(column, row, value)
     raise IndexError if out_of_bounds?(column, row)
     @matrix[column][row] = value
+    return self
   end
   
   def columns
@@ -47,5 +48,12 @@ class GameState
       return true
     end
     row < 0 || row > (@matrix[0].length - 1)
+  end
+  
+  def row(index)
+    raise IndexError if out_of_bounds?(0, index)
+    result = []
+    (0..(columns - 1)).each { |n| result << @matrix[n][index] }
+    return result
   end
 end
