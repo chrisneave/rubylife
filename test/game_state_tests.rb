@@ -116,7 +116,7 @@ class GameStateTests
   end
   
   class GetNeighbors < Test::Unit::TestCase
-    def test_IndexOutOfBounds_ReturnsEmptyArray
+    def test_IndexOutOfBounds_ReturnsZero
       # Arrange
       target = GameState.new(3, 3)
       
@@ -137,7 +137,7 @@ class GameStateTests
       cells = target.get_neighbors(1, 1)
       
       # Assert
-      assert_equal 8, cells
+      assert_equal Array.new(8), cells
     end
     
     def test_CellHas0Neighbors_Returns0
@@ -149,27 +149,27 @@ class GameStateTests
       cells = target.get_neighbors(0, 0)
       
       # Assert
-      assert_equal 0, cells
+      assert_equal [], cells
     end
     
     def test_CellIsInCorner_Returns3
       # Arrange
       # Act
       # Assert
-      assert_equal 3, GameState.new(3, 3).get_neighbors(0, 0)
-      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 0)
-      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 0)
-      assert_equal 3, GameState.new(3, 3).get_neighbors(2, 2)
+      assert_equal Array.new(3), GameState.new(3, 3).get_neighbors(0, 0)
+      assert_equal Array.new(3), GameState.new(3, 3).get_neighbors(2, 0)
+      assert_equal Array.new(3), GameState.new(3, 3).get_neighbors(0, 2)
+      assert_equal Array.new(3), GameState.new(3, 3).get_neighbors(2, 2)
     end
     
     def test_CellIsInMiddleOfEdge_Returns5
       # Arrange
       # Act
       # Assert
-      assert_equal 5, GameState.new(3, 3).get_neighbors(1, 0)
-      assert_equal 5, GameState.new(3, 3).get_neighbors(0, 1)
-      assert_equal 5, GameState.new(3, 3).get_neighbors(2, 1)
-      assert_equal 5, GameState.new(3, 3).get_neighbors(2, 1)
+      assert_equal Array.new(5), GameState.new(3, 3).get_neighbors(1, 0)
+      assert_equal Array.new(5), GameState.new(3, 3).get_neighbors(0, 1)
+      assert_equal Array.new(5), GameState.new(3, 3).get_neighbors(2, 1)
+      assert_equal Array.new(5), GameState.new(3, 3).get_neighbors(2, 1)
     end
   end
 end
