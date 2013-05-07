@@ -156,6 +156,8 @@ describe GameState, "#row" do
   end
   
   it "Returns the correct row for a valid index value" do
+    expect(GameState.new(3, 3).set_value_at_column_and_row(0, 0, 1).row(0)).to eq([1, 0, 0])
     expect(GameState.new(3, 3).set_value_at_column_and_row(1, 1, 1).row(1)).to eq([0, 1, 0])
+    expect(GameState.new(3, 3).set_value_at_column_and_row(2, 2, 1).row(2)).to eq([0, 0, 1])
   end
 end

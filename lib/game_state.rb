@@ -6,40 +6,40 @@ class GameState
       raise ArgumentError
     end
     
-    @matrix = Array.new(columns) { Array.new(rows, 0) }
+    @matrix = Array.new(rows) { Array.new(columns, 0) }
   end
   
   def get_value_at_column_and_row(column, row)
     raise IndexError if out_of_bounds?(column, row)
-    @matrix[column][row]
+    @matrix[row][column]
   end
   
   def set_value_at_column_and_row(column, row, value)
     raise IndexError if out_of_bounds?(column, row)
-    @matrix[column][row] = value
+    @matrix[row][column] = value
     return self
   end
   
   def columns
-    @matrix.length
+    @matrix[0].length
   end
   
   def rows
-    @matrix[0].length
+    @matrix.length
   end
   
   def get_neighbors(column, row)
     result = []
     return result if out_of_bounds?(column, row)
     
-    result << @matrix[column - 1][row - 1] unless out_of_bounds?(column - 1, row - 1)
-    result << @matrix[column - 1][row] unless out_of_bounds?(column - 1, row)
-    result << @matrix[column - 1][row + 1] unless out_of_bounds?(column - 1, row + 1)
-    result << @matrix[column][row - 1] unless out_of_bounds?(column, row - 1)
-    result << @matrix[column][row + 1] unless out_of_bounds?(column, row + 1)
-    result << @matrix[column + 1][row - 1] unless out_of_bounds?(column + 1, row - 1)
-    result << @matrix[column + 1][row] unless out_of_bounds?(column + 1, row)
-    result << @matrix[column + 1][row + 1] unless out_of_bounds?(column + 1, row + 1)
+    result << @matrix[row - 1][column - 1] unless out_of_bounds?(column - 1, row - 1)
+    result << @matrix[row][column - 1] unless out_of_bounds?(column - 1, row)
+    result << @matrix[row + 1][column - 1] unless out_of_bounds?(column - 1, row + 1)
+    result << @matrix[row - 1][column] unless out_of_bounds?(column, row - 1)
+    result << @matrix[row + 1][column] unless out_of_bounds?(column, row + 1)
+    result << @matrix[row - 1][column + 1] unless out_of_bounds?(column + 1, row - 1)
+    result << @matrix[row][column + 1] unless out_of_bounds?(column + 1, row)
+    result << @matrix[row + 1][column + 1] unless out_of_bounds?(column + 1, row + 1)
     result
   end
   
@@ -52,8 +52,10 @@ class GameState
   
   def row(index)
     raise IndexError if out_of_bounds?(0, index)
-    result = []
-    (0..(columns - 1)).each { |n| result << @matrix[n][index] }
-    return result
+    @matrix[index]
+  end
+  
+  def [](index)
+    self.row(index)
   end
 end
