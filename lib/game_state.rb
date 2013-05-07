@@ -58,4 +58,13 @@ class GameState
   def [](index)
     self.row(index)
   end
+  
+  def to_s
+    @matrix.to_s
+  end
+  
+  def ==(other_object)
+    raise ArgumentError unless other_object.is_a?(GameState)
+    other_object.to_s == self.to_s
+  end
 end

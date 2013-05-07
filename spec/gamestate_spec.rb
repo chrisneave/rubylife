@@ -161,3 +161,21 @@ describe GameState, "#row" do
     expect(GameState.new(3, 3).set_value_at_column_and_row(2, 2, 1).row(2)).to eq([0, 0, 1])
   end
 end
+
+describe GameState, "#to_s" do
+  it "Returns string representation of matrix" do
+    matrix = Array.new(3, Array.new(3, 0))
+    expect(GameState.new(3, 3).to_s).to eq(matrix.to_s)
+  end
+end
+
+describe GameState, "#==" do
+  it "Returns true for a matrix with matching elements" do
+    other_object = GameState.new(3, 3)
+    expect(GameState.new(3, 3)).to eq(other_object)
+  end
+
+  it "Return false if compared to a different type" do
+    expect { GameState.new(3, 3) == "a string" }.to raise_error(ArgumentError)
+  end
+end
