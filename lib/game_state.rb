@@ -44,10 +44,10 @@ class GameState
   end
   
   def out_of_bounds?(column, row)
-    if column < 0 || column > (@matrix.length - 1)
+    if column < 0 || column > (@matrix[0].length - 1)
       return true
     end
-    row < 0 || row > (@matrix[0].length - 1)
+    row < 0 || row > (@matrix.length - 1)
   end
   
   def row(index)

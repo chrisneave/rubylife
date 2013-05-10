@@ -42,33 +42,33 @@ describe GameState, "#get_value_at_column_and_row" do
 
   it "Raises IndexError for out of bounds index values" do
     # Arrange
-    gamestate = GameState.new(2, 2)
+    gamestate = GameState.new(3, 2)
     
     # Act
     # Assert
     expect { gamestate.get_value_at_column_and_row(-1, 1) }.to raise_error(IndexError)
     expect { gamestate.get_value_at_column_and_row(1, -1) }.to raise_error(IndexError)
     expect { gamestate.get_value_at_column_and_row(5, 1) }.to raise_error(IndexError)
-    expect { gamestate.get_value_at_column_and_row(1, 5) }.to raise_error(IndexError)
+    expect { gamestate.get_value_at_column_and_row(1, 2) }.to raise_error(IndexError)
   end
 end
 
 describe GameState, "#set_value_at_column_and_row" do
   it "Sets the correct cell for a valid cell coordinate" do
     # Arrange
-    gamestate = GameState.new(2, 2)
+    gamestate = GameState.new(3, 2)
 
     gamestate.set_value_at_column_and_row(0, 0, 0)
     gamestate.set_value_at_column_and_row(0, 1, 1)
-    gamestate.set_value_at_column_and_row(1, 0, 2)
-    gamestate.set_value_at_column_and_row(1, 1, 3)
+    gamestate.set_value_at_column_and_row(2, 0, 2)
+    gamestate.set_value_at_column_and_row(2, 1, 3)
     
     # Act
     # Assert
     expect(gamestate.get_value_at_column_and_row(0, 0)).to eq(0)
     expect(gamestate.get_value_at_column_and_row(0, 1)).to eq(1)
-    expect(gamestate.get_value_at_column_and_row(1, 0)).to eq(2)
-    expect(gamestate.get_value_at_column_and_row(1, 1)).to eq(3)
+    expect(gamestate.get_value_at_column_and_row(2, 0)).to eq(2)
+    expect(gamestate.get_value_at_column_and_row(2, 1)).to eq(3)
   end
 
   it "Raises IndexError for out of bounds coordinates" do
