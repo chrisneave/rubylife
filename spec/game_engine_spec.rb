@@ -75,3 +75,23 @@ describe GameEngine, "#get_next_generation" do
     expect(GameEngine.get_next_generation(start)).to eq(finish)
   end
 end
+
+describe GameEngine, "#get_random_generation" do
+  it "Returns a new generation" do
+    expect(GameEngine.get_random_generation(10, 10)).to be_a(GameState)
+  end
+
+  it "Raises ArgumentError for a negative index values" do
+    expect {GameEngine.get_random_generation(-1, 1)}.to raise_error(ArgumentError)
+    expect {GameEngine.get_random_generation(1, -1)}.to raise_error(ArgumentError)
+  end
+
+  it "Returns a different GameState over 5 consecutive calls (to assert randomness)" do
+    game_state = nil
+    (0..5).each do
+      new_game_state = GameEngine.get_random_generation(10, 10)
+      expect(new_game_state).to_not eq(game_state) if game_state
+      game_state = new_game_state
+    end
+  end
+end

@@ -32,4 +32,14 @@ class GameEngine
 
     return newstate
   end
+
+  def self.get_random_generation(columns, rows)
+    game_state = GameState.new(columns, rows)
+    (0..columns - 1).each do |column|
+      (0..rows - 1).each do |row|
+        game_state.set_value_at_column_and_row(column, row, rand(2))
+      end
+    end
+    game_state
+  end
 end
