@@ -67,4 +67,11 @@ class GameState
     raise ArgumentError unless other_object.is_a?(GameState)
     other_object.to_s == self.to_s
   end
+
+  def []=(index, new_value)
+    raise IndexError if out_of_bounds?(0, index)
+    raise IndexError if new_value.length > columns || new_value.length < columns
+    raise ArgumentError if !new_value.is_a?(Array)
+    @matrix[index] = new_value
+  end
 end

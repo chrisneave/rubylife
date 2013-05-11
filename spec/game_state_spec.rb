@@ -179,3 +179,29 @@ describe GameState, "#==" do
     expect { GameState.new(3, 3) == "a string" }.to raise_error(ArgumentError)
   end
 end
+
+describe GameState, "#[]=" do
+  it "Sets the value of a row for a given valid row index and correctly sized array" do
+    game_state = GameState.new(10, 3)
+    expected = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    game_state[1] = expected
+    expect(game_state[1]).to eq(expected)
+  end
+
+  it "Raises IndexError for an invalid index" do
+    game_state = GameState.new(10, 3)
+    expected = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    expect {game_state[5] = expected}.to raise_error(IndexError)
+    expect {game_state[-5] = expected}.to raise_error(IndexError)
+  end
+
+  it "Raises IndexError for an invalid size of input array" do
+    game_state = GameState.new(10, 3)
+    expect {game_state[1] = Array.new(9)}.to raise_error(IndexError)
+    expect {game_state[1] = Array.new(11)}.to raise_error(IndexError)
+  end
+
+  it "Raises ArgumentError when assigned a non-Array type" do
+    expect {GameState.new(8, 1)[0] = "a string"}.to raise_error(ArgumentError)
+  end
+end
