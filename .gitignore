@@ -19,3 +19,6 @@ doc/
 
 # Xcode files
 *.xcworkspace/*
+
+# Sublime Text 2 files
+*.sublime-*
