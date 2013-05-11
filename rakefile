@@ -3,3 +3,10 @@ require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => [:spec]
+
+desc "Execute Rspec with SimpleCov and open the results"
+# Would like to do this using the RakeTask instead of executing a shell command.
+task :coverage do
+	system("rspec")
+	system("open coverage/index.html")
+end
